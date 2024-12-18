@@ -2,6 +2,7 @@ package tests;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
@@ -38,5 +39,28 @@ public class CartTest {
                 productsPage.getBackpack(),
                 "Товар отличается от добавленого");
         softAssert.assertAll();
+    }
+
+    @Test
+    public void CheckRemoveProduct() {
+        SoftAssert softAssert = new SoftAssert();
+        loginPage.open();
+        loginPage.login("standard_user", "secret_sauce");
+        productsPage.backpackAddCart();
+        softAssert.assertEquals(cartPage.pushCart(),
+                "1",
+                "Кол-во товаров не соотвествует");
+        productsPage.backpackRemoveCart();
+        softAssert.assertTrue(cartPage.isBadgeDisplay(),
+                "Кол-во товаров около корзины отображается");
+        cartPage.goToCart();
+        softAssert.assertTrue(cartPage.firstItemInCart(),
+                "В корзине товар отображается");
+        softAssert.assertAll();
+    }
+
+    @AfterMethod(alwaysRun = true)
+    public void quit() {
+        driver.quit();
     }
 }
