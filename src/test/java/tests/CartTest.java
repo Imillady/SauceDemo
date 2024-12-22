@@ -30,13 +30,13 @@ public class CartTest {
         SoftAssert softAssert = new SoftAssert();
         loginPage.open();
         loginPage.login("standard_user", "secret_sauce");
-        productsPage.backpackAddCart();
+        productsPage.addToCart("Sauce Labs Bike Light");
         softAssert.assertEquals(cartPage.pushCart(),
                 "1",
                 "Кол-во товаров не соотвествует");
         cartPage.goToCart();
         softAssert.assertEquals(cartPage.itemNameCart(),
-                productsPage.getBackpack(),
+                productsPage.nameProduct("Sauce Labs Bike Light"),
                 "Товар отличается от добавленого");
         softAssert.assertAll();
     }
@@ -46,11 +46,11 @@ public class CartTest {
         SoftAssert softAssert = new SoftAssert();
         loginPage.open();
         loginPage.login("standard_user", "secret_sauce");
-        productsPage.backpackAddCart();
+        productsPage.addToCart("Sauce Labs Bike Light");
         softAssert.assertEquals(cartPage.pushCart(),
                 "1",
                 "Кол-во товаров не соотвествует");
-        productsPage.backpackRemoveCart();
+        productsPage.addToCart("Sauce Labs Bike Light");
         softAssert.assertTrue(cartPage.isBadgeDisplay(),
                 "Кол-во товаров около корзины отображается");
         cartPage.goToCart();

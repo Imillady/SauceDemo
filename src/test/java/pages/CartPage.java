@@ -8,8 +8,6 @@ public class CartPage {
     By goToCart = By.cssSelector("[data-test=shopping-cart-link]");
     By pushCart = By.cssSelector("[data-test=shopping-cart-badge]");
     By itemNameCart = By.cssSelector("[data-test=inventory-item-name]");
-    By BadgeDisplayed = By.cssSelector("[data-test=shopping-cart-badge]");
-    By itemInCartFirst = By.cssSelector("[data-test=inventory-item-name]");
 
     public CartPage(WebDriver driver) {
         this.driver = driver;
@@ -28,10 +26,10 @@ public class CartPage {
     }
 
     public boolean isBadgeDisplay() {
-        return driver.findElements(BadgeDisplayed).isEmpty();
+        return driver.findElements(pushCart).isEmpty();
     }
 
     public boolean firstItemInCart() {
-        return driver.findElements(itemInCartFirst).isEmpty();
+        return driver.findElements(itemNameCart).isEmpty();
     }
 }
